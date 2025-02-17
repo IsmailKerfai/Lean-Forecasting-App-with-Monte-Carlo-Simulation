@@ -1,0 +1,114 @@
+<!--
+  HTML-Dokumentation für die "Dashboard"-Seite der Anwendung.
+
+  - Zweck: Diese HTML-Datei stellt das Layout und die Struktur für das Dashboard der Anwendung dar.
+  - Technologien: HTML5, CSS, TypeScript
+  - Autor: Wael Laatiri und Jeanette Maziossek
+  - Version: 21.01.2025
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+</head>
+<body>
+<!-- Layout Container: Strunktur der Seite -->
+<div class="split-layout">
+  <!-- Top Blue Bar: Enthält das Logo -->
+  <div class="top-bar">
+    <img src="assets/logo.svg" alt="Logo" />
+  </div>
+
+  <!-- Main Content Area: Side Bar und Hauptinhalt der Seite -->
+  <div class="menu-content">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <nav>
+        <ul>
+          <li class="menu-item" (click)="navigateToDashboard()">
+            <img src="assets/dashboard.svg" alt="Dashboard Icon" />Dashboard
+          </li>
+          <li class="menu-item" (click)="navigateToThroughput()">
+            <img src="assets/throughput.svg" alt="Throughput Icon" />Throughput
+          </li>
+          <li class="menu-item" (click)="navigateToCycle()">
+            <img src="assets/cycle_time.svg" alt="Cycle Time Icon" />Cycle Time
+          </li>
+          <li class="menu-item" (click)="navigateToPrognosis()">
+            <img src="assets/montecarlo.svg" alt="Prognosis Icon" />Prognosis
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content: Hauptinhalt der Seite -->
+    <div class="main-content">
+      <div class="file-import">
+      <!-- Optional: Button to Upload a New File (visible if CSV data exists) -->
+
+
+      <!-- CSV Preview Table: Anzeige nur, wenn CSV-Datei vorhanden ist -->
+      <div class="csv-table-container" *ngIf="csvData.length && showPreview">
+        <div class="upload-controls">
+          <!-- Toggle button to hide the preview -->
+          <button type="button" (click)="togglePreview()">Inhalt ausblenden</button>
+        </div>
+        <table class="csv-table">
+          <thead>
+          <tr>
+            <th *ngFor="let header of csvHeaders">{{ header }}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let row of csvData">
+            <td *ngFor="let cell of row">{{ cell }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Upload Label & Response: Wird angezeigt, wenn die CSV-Vorschau nicht aktiv ist-->
+      <label for="file-upload" class="import-label" *ngIf="!showPreview">
+        <div class="upload-icon">
+          <img src="assets/upload.svg" alt="Import Icon" />
+        </div>
+        <div class="upload-text" *ngIf="!selectedFileName">
+          CSV Datei hochladen
+        </div>
+        <!-- Response Rectangle: zeigt eine Fehlermeldung oder Erfolgsmeldung an, wenn eine Datei hochgeladen wird -->
+        <div class="response" *ngIf="message">
+          <p>{{ message }}</p>
+          <p *ngIf="selectedFileName">
+            <strong>Ausgewählte Datei:</strong> {{ selectedFileName }}
+          </p>
+          <p *ngIf="totalFeatures !== null">
+            <strong>Gesamtanzahl Features:</strong> {{ totalFeatures }}
+          </p>
+          <p *ngIf="totalStories !== null">
+            <strong>Gesamtanzahl Stories:</strong> {{ totalStories }}
+          </p>
+          <div class="upload-controls">
+          <!-- If CSV data exists, show a toggle button to display its content -->
+          <button *ngIf="csvData.length" type="button" (click)="togglePreview()">
+            Inhalt anzeigen
+          </button>
+          </div>
+        </div>
+      </label>
+
+      <!-- Hidden File Input: Benutzer wird ermöglicht eine Datei auszuwählen -->
+      <input
+        id="file-upload"
+        type="file"
+        class="file-input"
+        accept=".csv"
+        (change)="onFileSelected($event)"
+      />
+    </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

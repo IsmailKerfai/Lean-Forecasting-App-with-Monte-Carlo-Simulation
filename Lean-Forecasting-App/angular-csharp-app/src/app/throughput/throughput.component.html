@@ -1,0 +1,132 @@
+<!--
+  HTML-Dokumentation für die "Throughput"-Seite der Anwendung.
+
+  - Zweck: Diese HTML-Datei stellt das Layout und die Struktur für die Throughput-Seite der Anwendung dar.
+  - Technologien: HTML5, CSS, TypeScript
+  - Autor: Wael Laatiri und Jeanette Maziossek
+  - Version: 21.01.2025
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Throughput page </title>
+</head>
+<body>
+<!-- Layout Container: Strunktur der Seite -->
+<div class="split-layout">
+  <!-- Top Blue Bar: Enthält das Logo -->
+  <div class="top-bar">
+    <img src="assets/logo.svg" alt="Logo" />
+  </div>
+
+  <!-- Main Content Area: Side Bar und Hauptinhalt der Seite -->
+  <div class="menu-content">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <nav>
+        <ul>
+          <li class="menu-item" (click)="navigateToDashboard()">
+            <img src="assets/dashboard.svg" alt="Dashboard Icon" />Dashboard
+          </li>
+          <li class="menu-item" (click)="navigateToThroughput()">
+            <img src="assets/throughput.svg" alt="Throughput Icon" />Throughput
+          </li>
+          <li class="menu-item" (click)="navigateToCycle()">
+            <img src="assets/cycle_time.svg" alt="Cycle Time Icon" />Cycle Time
+          </li>
+          <li class="menu-item" (click)="navigateToPrognosis()">
+            <img src="assets/montecarlo.svg" alt="Prognosis Icon" />Prognosis
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content: Hauptinhalt der Seite -->
+    <div class="main-content">
+      <!-- Upper Section: Zeigt den Tite der Seite und die Steuerungselemente zur Steuerung der Features und Stories -->
+      <div class="upper-div">
+        <div class="page-title-container">
+          <h1 class="page-title">Throughput</h1>
+        </div>
+        <div class="PBs-controls">
+          <!-- Button zur Auswahl von "Stories" -->
+          <button
+            class="PBs-button"
+            [class.active]="activeButton === 'stories'"
+            (click)="setActiveButton('stories')"
+          >
+            Stories
+          </button>
+          <!-- Button zur Auswahl von "Features" -->
+          <button
+            class="PBs-button"
+            [class.active]="activeButton === 'features'"
+            (click)="setActiveButton('features')"
+          >
+            Features
+          </button>
+        </div>
+      </div>
+
+      <div class="lower-div">
+        <!-- Container for Filter and Description Above Chart -->
+        <div class="data-container">
+          <!-- Left Side: Filter Buttons -->
+          <div class="left-side">
+            <div class="description-box" *ngIf="activeButton === 'features'">
+              <p>
+                50%-Durchsatz : {{ descriptionLine1 }} Features wurden abgeschlossen.
+              </p>
+              <p>
+                85%-Durchsatz : {{ descriptionLine2 }} Features wurden abgeschlossen.
+              </p>
+            </div>
+            <div class="description-box" *ngIf="activeButton === 'stories'">
+              <p>
+                50%-Durchsatz : {{ descriptionLine1 }} Stories wurden abgeschlossen.
+              </p>
+              <p>
+                85%-Durchsatz : {{ descriptionLine2 }} Stories wurden abgeschlossen.
+              </p>
+            </div>
+
+          </div>
+
+          <!-- Right Side: Description Box -->
+          <div class="right-side">
+            <div class="filter-buttons">
+              <!-- Filter by Sprint Range (visible when activeButton === 'stories') -->
+              <div class="filter-section" *ngIf="activeButton === 'stories'">
+                <label for="sprintStart">Startsprint:</label>
+                <input type="number" id="sprintStart" [(ngModel)]="sprintStart" />
+                <label for="sprintEnd">Endsprint:</label>
+                <input type="number" id="sprintEnd" [(ngModel)]="sprintEnd" />
+                <button (click)="filterBySprint()">Sprint filtern</button>
+              </div>
+
+              <!-- Filter by Month Range (visible when activeButton === 'features') -->
+              <div class="filter-section" *ngIf="activeButton === 'features'">
+                <label for="monthStart">Startmonat:</label>
+                <input type="number" id="monthStart" [(ngModel)]="monthStart" />
+                <label for="monthEnd">Endmonat:</label>
+                <input type="number" id="monthEnd" [(ngModel)]="monthEnd" />
+                <button (click)="filterByMonth()">Monat filtern</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chart Section Below Container -->
+        <div class="Char-side">
+          <div class="chart-container">
+            <canvas id="throughputChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

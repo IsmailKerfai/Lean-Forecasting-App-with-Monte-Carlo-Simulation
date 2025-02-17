@@ -1,0 +1,75 @@
+<!--
+  HTML-Dokumentation für die "Montecarlo"-Seite der Anwendung.
+
+  - Zweck: Diese HTML-Datei stellt das Layout und die Struktur für die Montecarlo Seite der Anwendung dar.
+  - Technologien: HTML5, CSS, TypeScript
+  - Autor: Wael Laatiri und Jeanette Maziossek
+  - Version: 21.01.2025
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monte Carlo </title>
+</head>
+<body>
+<!-- Layout Container: Strunktur der Seite -->
+<div class="split-layout">
+  <!-- Top Blue Bar: Enthält das Logo -->
+  <div class="top-bar">
+    <img src="assets/logo.svg" alt="Logo" />
+  </div>
+
+ <!-- Main Content Area: Side Bar und Hauptinhalt der Seite -->
+  <div class="menu-content">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <nav>
+        <ul>
+          <li class="menu-item" (click)="navigateToDashboard()">
+            <img src="assets/dashboard.svg" alt="Dashboard Icon" />Dashboard
+          </li>
+          <li class="menu-item" (click)="navigateToThroughput()">
+            <img src="assets/throughput.svg" alt="Throughput Icon" />Throughput
+          </li>
+          <li class="menu-item" (click)="navigateToCycle()">
+            <img src="assets/cycle_time.svg" alt="Cycle Time Icon" />Cycle Time
+          </li>
+          <li class="menu-item" (click)="navigateToPrognosis()">
+            <img src="assets/montecarlo.svg" alt="Prognosis Icon" />Prognosis
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content: Hauptinhalt der Seite -->
+    <div class="main-content">
+      <!-- Upper Section: Zeigt den Titel der Seite -->
+      <div class="upper-div">
+        <div class="page-title-container">
+          <h1 class="page-title">Monte Carlo Prognosis</h1>
+        </div>
+      </div>
+      <!-- Lower Section -->
+      <div class="lower-div">
+        <div class="rectangle-container">
+          <div class="background-label">
+            <div class="button-container">
+              <!-- Schaltfläche zur Navigation zum Forecast Release -->
+              <button class="rectangle-button" id="forecast-release" (click)="navigateToForecastRelease()">
+                Forecast Release
+              </button>
+              <!-- Schaltfläche zur Navigation zum Forecast Sprint -->
+              <button class="rectangle-button" id="forecast-sprint" (click)="navigateToForecastSprint()">
+                Forecast Sprint
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

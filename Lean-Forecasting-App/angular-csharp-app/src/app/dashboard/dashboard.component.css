@@ -1,0 +1,330 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  overflow: hidden;
+  font-size: 100%; /* 100% = 16px on most browsers */
+}
+
+/* Split Layout */
+.split-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Top Blue Bar */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6.3rem; /* Fixed height */
+  background: #66F7EF url('../../assets/stripes.svg');
+  background-size: cover;
+  z-index: 10;
+  display: flex;
+  align-items: center; /* Center logo vertically */
+  padding-left: 0.8rem; /* Adjust for spacing */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.logo-image {
+  height: 5rem;
+  margin-right: 1.5rem; /* Space between logo and text */
+}
+
+.top-bar img {
+  width: 70px;
+  height: 70px;
+}
+
+/* General Layout */
+.menu-content {
+  margin-top: 6rem; /* Top-bar height */
+  margin-left: 12rem; /* Sidebar width */
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Allow flexible resizing */
+  overflow-y: auto; /* Enable scrolling only when necessary */
+  height: calc(100vh - 6rem); /* Adjust height dynamically */
+  gap: 1rem; /* Space between sections */
+}
+
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 6rem; /* Below the top bar */
+  left: 0;
+  width: 12.5rem; /* Flexible width */
+  height: calc(100vh - 6rem); /* Dynamic height */
+  background-color: #041B2B;
+  color: white;
+  padding: 2.5rem 0.625rem; /* Adjust padding */
+  box-shadow: 0.125rem 0 0.3125rem rgba(0, 0, 0, 0.2);
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Space between items */
+}
+
+
+/* Menu Items */
+.menu-item {
+  display: flex; /* Flexbox for alignment */
+  flex-direction: row;
+  align-items: center; /* Vertically align icon and text */
+  padding: 1rem; /* Consistent padding for all states */
+  color: white;
+  font-size: 1.2rem; /* Font size for bigger text */
+  font-weight: 100;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Smooth hover effect */
+  background-color: transparent; /* Default transparent background */
+  gap: 10px; /* Space between icon and text */
+}
+
+/* Icon Styles */
+.menu-item img,
+.menu-item i, /* For Font Awesome or other icon fonts */
+.menu-item svg {
+  width: 1.7rem; /* Adjust as needed for consistent icon size */
+  height: 1.7rem;
+  flex-shrink: 0; /* Prevent icon from shrinking */
+}
+
+/* Active Item */
+.menu-item.active {
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Enhanced shadow for active */
+}
+
+/* Hover Effect */
+.menu-item:hover {
+  background-color: rgba(102, 247, 239, 0.5); /* 50% opacity */
+  border-radius: 16px; /* Maintain rounded corners */
+}
+
+/* Main Content Area */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem; /* General padding */
+  overflow: auto; /* Enable scrolling if necessary */
+  justify-content: space-between; /* Distribute space evenly */
+
+}
+
+/* File Import Section */
+.file-import {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  justify-content: flex-start; /* Align content to the top */
+  align-items: stretch; /* Stretch elements to take full width */
+  width: 100%; /* Ensure full width */
+  height: 100%;
+  gap: 0.5rem; /* Add spacing between button and table */
+  padding: 2rem; /* Add some padding for the section */
+}
+
+/* Upload Controls */
+.upload-controls {
+  text-align: center; /* Center the button */
+}
+
+.upload-controls button {
+  padding: 0.5rem 1.5rem;
+  background-color: #3a8188;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  width: 17rem; /* Consistent button width */
+}
+
+.upload-controls button:hover {
+  background-color: #2a6166; /* Darker shade on hover */
+}
+
+/* Initial Upload Label */
+.import-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%; /* Take full width */
+  height: 100%; /* Take the full height of parent */
+  min-height: 300px; /* Add a minimum height */
+  cursor: pointer;
+  text-align: center;
+  border: 3px dashed #d9d9d9; /* Dashed border */
+  border-radius: 20px; /* Rounded corners */
+  background-color: transparent; /* Transparent background */
+  transition: all 0.3s ease;
+}
+
+.import-label:hover {
+  border-color: #3a8188; /* Change border color on hover */
+  color: #3a8188;
+}
+
+
+.upload-icon img {
+  width: 2rem; /* Adjust size */
+  height: 2rem;
+}
+.import-label:hover .upload-icon img {
+  filter: brightness(0.7); /* Example: Darken the image */
+  transform: scale(1.1); /* Example: Slightly enlarge the image */
+  transition: transform 0.2s ease, filter 0.2s ease; /* Smooth hover effect */
+}
+
+
+.upload-text {
+  font-size: 1.4rem; /* Larger text size */
+  font-weight: 500;
+  color: #79747e;
+  font-family: Arial, sans-serif;
+}
+.import-label:hover .upload-text {
+  color: #3a8188; /* Change text color of the child element */
+}
+
+.upload-description {
+  font-size: 1rem; /* Slightly larger description */
+  color: #9d9d9d;
+  font-family: Arial, sans-serif;
+}
+
+.file-input {
+  display: none; /* Hide the actual file input */
+}
+
+/* Response Message */
+.response {
+  justify-content: left;
+  font-size: 1.2em;
+  font-weight: 500;
+  color: #79747e;
+  font-family: Arial, sans-serif;
+  margin-top: 8px;
+}
+
+/* Table Container */
+.csv-table-container {
+  flex: 1;
+  max-height: calc(100vh - 15rem); /* Adjust height to ensure it fits within the viewport */
+  overflow-y: auto; /* Enable vertical scrolling */
+  border: 1px solid #ddd; /* Add a border around the table */
+  border-radius: 10px; /* Add rounded corners */
+  padding: 0.5rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for separation */
+}
+
+/* Table Styles */
+.csv-table {
+  width: 100%;
+  height: 100%;
+  border-collapse: collapse;
+}
+
+.csv-table th,
+.csv-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  word-wrap: break-word; /* Break long text into a new line */
+}
+
+.csv-table th {
+  background-color: #f4f4f4; /* Light grey background for the header */
+  font-weight: bold;
+  position: sticky; /* Fix the header in place */
+  top: 0;
+  z-index: 1; /* Ensure header stays on top */
+}
+
+.csv-table td {
+  min-width: 10rem; /* Ensure each cell has a minimum width */
+}
+
+.csv-table th {
+  min-width: 10rem; /* Ensure each header cell has a minimum width */
+}
+
+@media (max-width: 48rem) {
+  .sidebar {
+    width: 2.8rem; /* Collapsed sidebar width */
+    padding: 0; /* Adjust padding */
+    overflow: hidden; /* Hide content overflow */
+    transition: width 0.3s ease; /* Smooth transition */
+    white-space: nowrap; /* Prevent text wrapping */
+  }
+
+  /* Menu Item Adjustments */
+  .menu-item {
+    display: flex;
+    align-items: center; /* Vertically center the icon */
+    justify-content: flex-start; /* Align items to the left */
+    padding: 1rem 0.4rem; /* Adjust vertical padding to move items lower */
+    margin-top: 0.5rem; /* Add space between menu items */
+    overflow: hidden; /* Prevent overflow */
+    transition: all 0.3s ease; /* Smooth transition */
+
+  }
+
+  .menu-item img {
+    width: 2rem; /* Icon size */
+    height: 2rem;
+    flex-shrink: 0; /* Prevent icon shrinking */
+  }
+
+  .menu-item span {
+    display: none; /* Hide text when sidebar is collapsed */
+  }
+
+  /* Sidebar Hover to Expand */
+  .sidebar:hover {
+    width: 12.5rem; /* Expand the sidebar */
+  }
+
+  .sidebar:hover .menu-item {
+    justify-content: flex-start; /* Align items with text */
+    padding: 0.5rem 1rem; /* Add padding for expanded state */
+  }
+
+  .sidebar:hover .menu-item span {
+    display: inline-block; /* Show text when expanded */
+    opacity: 1; /* Smooth appearance */
+    transition: opacity 0.3s ease;
+  }
+
+  /* Adjust Content Margin */
+  .menu-content {
+    margin-left: 2rem; /* Adjust margin when sidebar is collapsed */
+    transition: margin-left 0.3s ease;
+  }
+
+  .sidebar:hover ~ .menu-content {
+    margin-left: 12.5rem; /* Adjust content margin when sidebar expands */
+  }
+
+
+}

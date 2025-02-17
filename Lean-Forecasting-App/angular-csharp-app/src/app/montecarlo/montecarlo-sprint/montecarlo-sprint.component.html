@@ -1,0 +1,263 @@
+<!--
+  HTML-Dokumentation für die "Montecarlo-Sprint"-Seite der Anwendung.
+
+  - Zweck: Diese HTML-Datei stellt das Layout und die Struktur für die Montecarlo-Spint Seite der Anwendung dar.
+  - Technologien: HTML5, CSS, TypeScript
+  - Autor: Wael Laatiri und Jeanette Maziossek
+  - Version: 21.01.2025
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monte Carlo | Forecast Sprint</title>
+</head>
+<body>
+<!-- Layout Container: Strunktur der Seite -->
+<div class="split-layout">
+  <!-- Top Blue Bar: Enthält das Logo -->
+  <div class="top-bar">
+    <img src="assets/logo.svg" alt="Logo" />
+  </div>
+
+  <!-- Main Content Area: Side Bar und Hauptinhalt der Seite -->
+  <div class="menu-content">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <nav>
+        <ul>
+          <li class="menu-item" (click)="navigateToDashboard()">
+            <img src="assets/dashboard.svg" alt="Dashboard Icon" />Dashboard
+          </li>
+          <li class="menu-item" (click)="navigateToThroughput()">
+            <img src="assets/throughput.svg" alt="Throughput Icon" />Throughput
+          </li>
+          <li class="menu-item" (click)="navigateToCycle()">
+            <img src="assets/cycle_time.svg" alt="Cycle Time Icon" />Cycle Time
+          </li>
+          <li class="menu-item" (click)="navigateToPrognosis()">
+            <img src="assets/montecarlo.svg" alt="Prognosis Icon" />Prognosis
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content: Hauptinhalt der Seite -->
+    <div class="main-content">
+      <!-- Upper Section: Zeigt den Tite der Seite und die Steuerungselemente zur Steuerung der Features und Stories -->
+      <div class="upper-div">
+        <div class="page-title-container">
+          <button class="back-button" (click)="navigateToPrognosis()">
+            <img src="assets/arrow-back.svg" alt="arrow-back Icon">
+          </button>
+          <h1 class="page-title">Monte Carlo | Forecast Sprint</h1>
+        </div>
+        <div class="PBs-controls">
+          <!-- Button zur Auswahl von "Stories" -->
+          <button
+            class="PBs-button"
+            [class.active]="activeButton === 'stories'"
+            (click)="setActiveButton('stories')"
+          >
+            Stories
+          </button>
+          <!-- Button zur Auswahl von "Features" -->
+          <button
+            class="PBs-button"
+            [class.active]="activeButton === 'features'"
+            (click)="setActiveButton('features')"
+          >
+            Features
+          </button>
+        </div>
+      </div>
+
+
+      <!-- Lower Section -->
+      <div class="lower-div">
+        <!-- Left Side: Description Box -->
+        <div class="left-side">
+          <!-- StartDate-Feature Rectangle -->
+          <div class="date-controls">
+            <!-- Start Date -->
+            <div class="date-row">
+              <label for="StartDatePrognosis">Startdatum</label>
+              <input
+                type="date"
+                id="StartDatePrognosis"
+                [value]="activeButton === 'features' ? featureStartDate : storyStartDate"
+                (input)="onDateInput($event)"
+                (change)="handleStartDateInput($event)"
+                placeholder="YYYY-MM-DD"
+              />
+            </div>
+
+            <!-- End Date -->
+            <div class="date-row">
+              <label for="EndDatePrognosis">Enddatum</label>
+              <input
+                type="date"
+                id="EndDatePrognosis"
+                [value]="activeButton === 'features' ? featureEndDate : storyEndDate"
+                (input)="onDateInput($event)"
+                (change)="handleEndDateInput($event)"
+                placeholder="YYYY-MM-DD"
+              />
+            </div>
+
+            <!-- Save Button -->
+            <button class="save-button" (click)="onSaveDates()">Speichern</button>
+          </div>
+
+
+          <!-- Beschreibung des Prognosebereichs -->
+          <div class="description-sprint-box">
+            <!-- Conditional Rendering for Features and Stories -->
+            <!-- PBI Section (Features) -->
+            <div *ngIf="activeButton === 'features'" class="textBox">
+              <div class="pbi-section-big">  
+                <h3>Ergebnisse Monte-Carlo-Simulation (Wochenbasis)<br><span>mit {{ simulationCount }} Simulationen</span></h3>
+                <div class="pbi-section">
+                  <div class="pbi-item" id="f95">
+                    <strong>Zu 95%:</strong>
+                    <span><strong>{{ p95 }}</strong> oder mehr PBIs</span>
+                  </div>
+                  <div class="pbi-item" id="f85">
+                    <strong>Zu 85%:</strong>
+                    <span><strong>{{ p85 }}</strong> oder mehr PBIs</span>
+                  </div>
+                  <div class="pbi-item" id="f50">
+                    <strong>Zu 50%:</strong>
+                    <span><strong>{{ p50 }}</strong> oder mehr PBIs</span>
+                  </div>
+                </div>
+
+                <!-- Child Items (Features) -->
+                <div class="child-items">
+                  <p>Anzahl der Child Items (Stories): <strong>{{ storiesPerFeature }}</strong></p>
+                  <p>Wochenanzahl: <strong>{{ numberOfWeeks }}</strong></p>
+                </div>
+              </div>
+
+              <!-- Forecast Section (Features) -->
+              <div class="forecast-section">
+                <h4 class="forecast-title">Forecast</h4>
+                <div class="forecast-column-big">
+                  <div class="forecast-column" id="f95">
+                    <p><strong>Zu 95%:</strong></p>
+                    <p>Storiesanzahl: <strong>{{ numberOfStoriesP95 }}</strong></p>
+                    <p>Anzahl right-sized Features: <strong>{{ numberOfRightSizedFeatureP95 }}</strong></p>
+                  </div>
+                  <div class="forecast-column" id="f85">
+                    <p><strong>Zu 85%:</strong></p>
+                    <p>Storiesanzahl: <strong>{{ numberOfStoriesP85 }}</strong></p>
+                    <p>Anzahl right-sized Features: <strong>{{ numberOfRightSizedFeatureP85 }}</strong></p>
+                  </div>
+                  <div class="forecast-column" id="f50">
+                    <p><strong>Zu 50%:</strong></p>
+                    <p>Storiesanzahl: <strong>{{ numberOfStoriesP50 }}</strong></p>
+                    <p>Anzahl right-sized Features: <strong>{{ numberOfRightSizedFeatureP50 }}</strong></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Stories Section -->
+            <div *ngIf="activeButton === 'stories'" class="textBox">
+              <div class="pbi-sectionStory">
+                <h3>Ergebnisse Monte-Carlo-Simulation (Sprintsbasis) <br><span>mit {{ simulationCount }} Simulationen</span></h3>
+                <div class="pbi-itemStory-big">
+                  <div class="pbi-itemStory" id="f85">
+                    <strong>Zu 85%:</strong>
+                    <div class="story">
+                      <span><strong>{{storiesP85}}</strong> oder mehr Stories </span>
+                    </div>
+                  </div>
+                  <div class="pbi-itemStory" id="f50">
+                    <strong>Zu 50%:</strong>
+                    <div class="story">
+                      <span><strong>{{storiesP50}}</strong> oder mehr  Stories </span>
+                    </div>
+                  </div>
+                </div>
+                <!-- Child Items (Features) -->
+                <div class="child-items-Story">
+                  <p>Wochenanzahl: <strong>{{ totalWeeks }}</strong></p>
+                  <p>Sprintsanzahl: <strong>{{ totalSprints }}</strong></p>
+                </div>
+              </div>
+
+              
+
+              <!-- Forecast Section (Stories) -->
+              <div class="forecast-sectionStories">
+                <h4 class="forecast-title">Forecast</h4>
+                <div class="forecast-columnStories-big">
+                  <div class="forecast-columnStories" id="f85">
+                    <p><strong>Zu 85%:</strong></p>
+                    <p>Storiesanzahl: <strong>{{ StoriesnumberOfStoriesP85 }}</strong></p>
+                  </div>
+                  <div class="forecast-columnStories" id="f50">
+                    <p><strong>Zu 50%:</strong></p>
+                    <p>Storiesanzahl: <strong>{{ StoriesnumberOfStoriesP50 }}</strong></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Chart and Simulation Controls -->
+        <div class="right-side">
+          <!-- Chart -->
+          <div class="chart-container">
+            <canvas id="sprintChart"></canvas>
+          </div>
+
+          <!-- Simulation Controls -->
+          <div class="simulation-controls">
+            <!-- Row Container for Start and End Dates -->
+            <div class="row-container">
+              <!-- Start Date Input -->
+              <label for="startDate">Startdatum:</label>
+              <input
+                type="date"
+                id="startDate"
+                [value]="activeButton === 'features' ? startDate : startDateStories"
+                (input)="onDateInput($event)"
+                (blur)="onStartDateChange($event)"
+              />
+
+              <!-- End Date Input -->
+              <label for="endDate">Enddatum:</label>
+              <input
+                type="date"
+                id="endDate"
+                [value]="activeButton === 'features' ? endDate : endDateStories"
+                (input)="onDateInput($event)"
+                (blur)="onEndDateChange($event)"
+              />
+            </div>
+
+            <!-- Simulation Count Input -->
+            <div class="row-container">
+              <label for="simulationCount">Anzahl Simulationen:</label>
+              <input
+                type="number"
+                id="simulationCount"
+                placeholder="Eine Zahl eingeben"
+                min="1"
+                [value]="simulationCount"
+                (input)="onSimulationCountChange($event)"
+              />
+              <!-- Simulate Button -->
+              <button (click)="onSimulate()">Simulate</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

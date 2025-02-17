@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cycle Time Features</title>
+</head>
+<body>
+<!-- Layout Container -->
+<div class="split-layout">
+  <!-- Top Blue Bar -->
+  <div class="top-bar">
+    <img src="assets/logo.svg" alt="Logo" />
+  </div>
+
+  <!-- Main Content Area -->
+  <div class="menu-content">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <nav>
+        <ul>
+          <li class="menu-item" (click)="navigateToDashboard()">
+            <img src="assets/dashboard.svg" alt="Dashboard Icon" />Dashboard
+          </li>
+          <li class="menu-item" (click)="navigateToThroughput()">
+            <img src="assets/throughput.svg" alt="Throughput Icon" />Throughput
+          </li>
+          <li class="menu-item" (click)="navigateToCycle()">
+            <img src="assets/cycle_time.svg" alt="Cycle Time Icon" />Cycle Time
+          </li>
+          <li class="menu-item" (click)="navigateToPrognosis()">
+            <img src="assets/montecarlo.svg" alt="Prognosis Icon" />Prognosis
+          </li>
+        </ul>
+      </nav>
+    </aside>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+    
+      <div class="upper-div">
+        <div class="page-title-container">
+          <h1 class="page-title">Cycle Time - Features</h1>
+        </div>
+        <div class ="PBs-controls">
+        	<button class="PBs-button" [class.active]="selectedButton === 'stories'" (click)="navigateToCycle()"> Stories </button>
+        	<button class="PBs-button" [class.active]="selectedButton === 'features'" (click)="navigateToFeature()"> Features </button>
+        </div>
+      </div>
+      
+      <div class="middle-div">	
+			<div class="left-side">
+				<div class="date-controls">
+				    <!-- Start Date -->
+				    <div class="date-row">
+				      <label for="StartDatePrognosis">Startdatum</label>
+				      <input id="startDate" type="date" [value]="startDate ? startDate.toISOString().split('T')[0] : ''" (change)="startDate = handleDateChangestart($event.target)"/>
+				    </div>
+
+				    <!-- End Date -->
+				    <div class="date-row">
+				      <label for="EndDatePrognosis">Enddatum</label>
+				      <input id="endDate" type="date" [value]="endDate ? endDate.toISOString().split('T')[0] : ''" (change)="endDate = handleDateChangeend($event.target)"/>
+				    </div>
+				    <!-- Antwort -->
+				    <div *ngIf="responseText">
+						<p>{{ responseText }}</p>
+					</div>
+					<!-- Berechne -->
+					<button class="save-button" (click)="SendDate()">Berechne</button>
+				</div>
+			</div>
+		</div>
+		<div class="middle-div">
+    		<div class="left-side">
+				<div class="chart-container">
+					<canvas id="Cycle_Day"></canvas>
+				</div>
+				<!-- Middle Section -->
+				<div class="chart-container">
+					<canvas id="Lead_Day"></canvas>
+				</div>
+
+				<!-- Lower Section -->
+				<div class="chart-container">
+					<canvas id="Cycle_Efficiency"></canvas>
+				</div>
+			</div>
+		</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,768 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  overflow: hidden;
+  font-size: 100%; /* 100% = 16px on most browsers */
+}
+
+/* Split Layout */
+.split-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Top Blue Bar */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6.3rem; /* Fixed height */
+  background: #66F7EF url('../../../assets/stripes.svg');
+  background-size: cover;
+  z-index: 10;
+  display: flex;
+  align-items: center; /* Center logo vertically */
+  padding-left: 0.8rem; /* Adjust for spacing */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.logo-image {
+  height: 5rem;
+  margin-right: 1.5rem; /* Space between logo and text */
+}
+
+.top-bar img {
+  width: 70px;
+  height: 70px;
+}
+
+/* General Layout */
+.menu-content {
+  margin-top: 6rem; /* Top-bar height */
+  margin-left: 12rem; /* Sidebar width */
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Allow flexible resizing */
+  overflow-y: auto; /* Enable scrolling only when necessary */
+  height: calc(100vh - 6rem); /* Adjust height dynamically */
+  gap: 1rem; /* Space between sections */
+}
+
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 6rem; /* Below the top bar */
+  left: 0;
+  width: 12.5rem; /* Flexible width */
+  height: calc(100vh - 6rem); /* Dynamic height */
+  background-color: #041B2B;
+  color: white;
+  padding: 2.5rem 0.625rem; /* Adjust padding */
+  box-shadow: 0.125rem 0 0.3125rem rgba(0, 0, 0, 0.2);
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Space between items */
+}
+
+
+/* Menu Items */
+.menu-item {
+  display: flex; /* Flexbox for alignment */
+  flex-direction: row;
+  align-items: center; /* Vertically align icon and text */
+  padding: 1rem; /* Consistent padding for all states */
+  color: white;
+  font-size: 1.2rem; /* Font size for bigger text */
+  font-weight: 100;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Smooth hover effect */
+  background-color: transparent; /* Default transparent background */
+  gap: 10px; /* Space between icon and text */
+}
+
+/* Icon Styles */
+.menu-item img,
+.menu-item i, /* For Font Awesome or other icon fonts */
+.menu-item svg {
+  width: 1.7rem; /* Adjust as needed for consistent icon size */
+  height: 1.7rem;
+  flex-shrink: 0; /* Prevent icon from shrinking */
+}
+
+/* Active Item */
+.menu-item.active {
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Enhanced shadow for active */
+}
+
+/* Hover Effect */
+.menu-item:hover {
+  background-color: rgba(102, 247, 239, 0.5); /* 50% opacity */
+  border-radius: 16px; /* Maintain rounded corners */
+}
+
+/* Main Content Area */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem; /* General padding */
+  justify-content: space-between; /* Distribute space evenly */
+
+}
+
+/* Upper Section */
+.upper-div {
+  display: flex;
+  justify-content: space-between; /* Distribute space evenly */
+  align-items: center; /* Center align vertically */
+  gap: 2rem; /* Smaller, responsive gap */
+  margin-bottom: 0.7rem;
+  margin-top: 0.2rem;
+  width: 100%; /* Full width */
+  padding: 0 16px; /* Adjust padding for responsive spacing */
+}
+
+
+/* Page Title Container */
+.page-title-container {
+  display: flex;
+  align-items: center; /* Center the title vertically */
+  border: 1px solid #041B2B; /* Add a border */
+  border-radius: 15px; /* Rounded corners */
+  background-color: #ffffff; /* White background */
+  padding: 0.5rem 1rem; /* Adjust padding for balance */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  gap: 1rem; /* Space between the button and title */
+  flex: 1; /* Allow the container to grow */
+  margin: 0 auto; /* Center the title container */
+}
+
+/* Page Title */
+.page-title {
+  font-size: 1.4rem; /* Responsive font size */
+  color: #041B2B; /* Text color */
+  font-family: Arial, sans-serif; /* Font style */
+  text-align: center; /* Center the title */
+  flex: 1; /* Allow title to grow */
+  padding: 0.5rem; /* Adjust padding for better spacing */
+}
+
+/* Back Button */
+.back-button {
+  background: none; /* No background for the button */
+  border: none; /* Remove border */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-button img {
+  width: 20px;
+  height: 20px;
+}
+
+
+
+/* Buttons */
+.PBs-controls {
+  display: flex;
+  gap: 1rem; /* Dynamic gap between buttons */
+  justify-content: flex-end; /* Align to the right */
+  align-items: center; /* Center buttons vertically */
+}
+
+.PBs-button {
+  width: auto; /* Allow dynamic width */
+  min-width: 7rem; /* Minimum width for small screens */
+  padding: 1.1rem 1.2rem; /* Dynamic padding for better scaling */
+  font-size: 1em; /* Font size */
+  border: 1px solid #041B2B; /* Button border */
+  color: #041B2B; /* Button text color */
+  cursor: pointer; /* Pointer cursor on hover */
+  border-radius: 15px; /* Rounded corners */
+  background-color: #ffffff; /* Button background */
+  text-align: center; /* Center text */
+  transition: all 0.2s ease; /* Smooth hover effect */
+}
+
+
+/* Hover Effect */
+.PBs-controls .PBs-button:hover {
+  background-color: #041B2B; /* Darker blue on hover */
+  color: white; /* White text on hover */
+}
+
+/* Active Button Styles */
+.PBs-controls .PBs-button.active {
+  background-color: #041B2B; /* Darker blue for active state */
+  color: white; /* White text for active state */
+}
+
+/* Ensure the active state is consistent on hover */
+.PBs-controls .PBs-button.active:hover {
+  background-color: #041B2B; /* Keep dark blue for active state */
+  color: white; /* Keep white text for active state */
+}
+
+/* Button Click Effect */
+.PBs-controls .PBs-button:active {
+  transform: scale(0.98); /* Slightly shrink on click */
+}
+
+/* =========================================
+   Lower Section
+   ========================================= */
+.lower-div {
+  display: flex;
+  flex: 1;
+  gap: 2rem;
+  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+  width: 100%;
+  box-sizing: border-box; /* Include padding and borders in width calculation */
+  padding: 1rem; /* Add padding for inner spacing */
+}
+
+/* Left and Right Side Containers */
+.left-side,
+.right-side {
+  flex: 1; /* Equal space on large screens */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Reduced gap for better spacing */
+  box-sizing: border-box;
+  min-width: 300px; /* Ensure a minimum width for content */
+}
+
+/* =========================================
+   Child Components within Lower Div
+   ========================================= */
+
+/* Date Controls */
+.date-controls {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+  gap: 1rem;
+  background-color: white;
+  border: 1px solid #041B2B;
+  border-radius: 15px;
+  padding: 0.8rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Full width of the container */
+}
+
+.date-row {
+  display: flex;
+  align-items: center; /* Center-align label and input vertically */
+  gap: 0.5rem; /* Space between label and input */
+  flex: 1; /* Allow rows to grow proportionally */
+}
+
+.date-row label {
+  font-size: 0.9rem;
+  color: #041B2B;
+  font-weight: bold;
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.date-row input {
+  flex: 1; /* Allow input fields to grow dynamically */
+  padding: 0.6rem;
+  border: 1px solid #041B2B;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.date-row input:focus {
+  border-color: #66F7EF; /* Highlight border on focus */
+  box-shadow: 0 0 5px rgba(102, 247, 239, 0.5); /* Subtle focus shadow */
+}
+
+.save-button {
+  padding: 0.7rem 1rem;
+  border: 1px solid #041B2B;
+  background-color: #041B2B;
+  color: white;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex: 1;
+}
+
+.save-button:hover {
+  background-color: #66F7EF;
+  color: #041B2B;
+}
+
+/* Description Sprint Box */
+.description-sprint-box {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid #041B2B;
+  border-radius: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 1rem; /* Dynamic padding */
+  overflow: hidden;
+  height: 100%;
+}
+
+.description-sprint-box h3 {
+  font-size: clamp(1.5rem, 1.4vw, 2.3rem);; /* Dynamic header size */
+  color: #041B2B;
+  margin-top: 2rem;
+}
+
+.textBox{
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+
+/* PBI Section */
+.pbi-section-big{
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.pbi-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; 
+  gap: 0.9rem; 
+  text-align: center;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.pbi-item {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 0.8rem;
+  border-bottom: 2px solid;
+  border-radius: 6px;
+}
+
+#f95{
+  border-color: lightgreen;
+}
+#f85{
+  border-color: green;
+  border-width: 3px;
+}
+#f50{
+  border-color: orange;
+}
+
+.pbi-item strong {
+  font-size: clamp(1.2rem, 1.2vw, 2rem); /* Bold numbers */
+  color: #041B2B;
+  margin: 0.5rem 0;
+}
+
+.pbi-item span {
+  font-size: clamp(1.2rem, 1.2vw, 2rem);; /* Text below bold numbers */
+  color: #041B2B;
+  margin: 0.5rem 0;
+}
+
+.child-items {
+  font-size: clamp(1.2rem, 1.2vw, 2rem);
+  color: #041B2B;
+  margin-top: 0.7rem;
+}
+
+/* Forecast Section */
+.forecast-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.forecast-column-big{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  gap: 0.9rem; /* Add spacing between forecast columns */
+  align-items: center;
+  justify-content: center; /* Center the forecast sections */
+
+}
+
+.forecast-column {
+  flex: 1;
+  font-size: clamp(1.2rem, 1.1vw, 2rem);
+  border-left: 2px solid;
+  border-right: 2px solid;
+  border-radius: 6px;
+}
+
+.forecast-column p {
+  margin: 0.5rem 0;
+}
+
+.forecast-column strong {
+  color: #041B2B;
+}
+
+.forecast-title {
+  font-size: clamp(1.5rem, 1.5vw, 2.3rem); /* Adjust size for visibility */
+  font-weight: bold;
+  color: #041B2B;
+  text-align: center;
+}
+
+/* PBI Section Story */
+.pbi-sectionStory {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around; 
+  gap: 2rem; 
+  text-align: center;
+  flex-wrap: wrap; 
+}
+
+.pbi-itemStory-big {
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* Center-align content */
+  justify-content: space-around;
+}
+
+.pbi-itemStory {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center-align content */
+  margin-top: 1rem;
+  border-bottom: 2px solid;
+  border-radius: 6px;
+}
+
+.pbi-itemStory strong {
+  font-size: clamp(1.2rem, 1.2vw, 2rem);
+  color: #041B2B;
+  margin: 0.5rem 0;
+}
+
+.pbi-itemStory .story span {
+  display: block; 
+  font-size: clamp(1.2rem, 1.2vw, 2rem); 
+  color: #041B2B;
+  margin: 0.5rem 0;
+}
+
+.pbi-itemStory .story .enddate strong {
+  color: #041B2B;
+}
+
+/* Child Items */
+.child-items-Story {
+  font-size: clamp(1.2rem, 1.2vw, 2rem); 
+  color: #041B2B;
+  margin-bottom: 0.5rem;
+}
+
+
+/* Forecast Section Stories */
+.forecast-sectionStories {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+.forecast-columnStories-big {
+  display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    align-items: center;
+    justify-content: center;
+}
+.forecast-columnStories {
+  flex: 1;
+  font-size: clamp(1.2rem, 1.1vw, 2rem);
+  border-left: 2px solid;
+  border-right: 2px solid;
+  border-radius: 6px;
+}
+
+.forecast-columnStories p {
+  margin: 0.5rem 0;
+}
+
+.forecast-columnStories strong {
+  color: #041B2B;
+}
+
+/* Chart Container */
+.chart-container {
+  height: 100%;
+  border: 1px solid #041B2B;
+  background-color: white;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.chart-container canvas {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+}
+
+/* Simulation Controls */
+.simulation-controls {
+  border: 1px solid #041B2B;
+  padding: 0.6rem;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.row-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.row-container input {
+  flex: 1;
+  min-width: 10rem;
+  max-width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #041B2B;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.row-container input:focus {
+  border-color: #66F7EF;
+  box-shadow: 0 0 5px rgba(102, 247, 239, 0.5);
+}
+
+.row-container label {
+  font-size: 0.9rem;
+  color: #041B2B;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.row-container button {
+  padding: 0.6rem 1rem;
+  border: 1px solid #041B2B;
+  background-color: #041B2B;
+  color: white;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.row-container button:hover {
+  background-color: #66F7EF;
+  color: #041B2B;
+}
+
+
+
+
+@media (max-width: 48rem) { /* ~768px, but flexible */
+  .sidebar {
+    width: 2.8rem; /* Collapsed sidebar width */
+    padding: 0; /* Adjust padding */
+    overflow: hidden; /* Hide content overflow */
+    transition: width 0.3s ease; /* Smooth transition */
+    white-space: nowrap; /* Prevent text wrapping */
+  }
+
+  /* Menu Item Adjustments */
+  .menu-item {
+    display: flex;
+    align-items: center; /* Vertically center the icon */
+    justify-content: flex-start; /* Align items to the left */
+    padding: 1rem 0.4rem; /* Adjust vertical padding to move items lower */
+    margin-top: 0.5rem; /* Add space between menu items */
+    overflow: hidden; /* Prevent overflow */
+    transition: all 0.3s ease; /* Smooth transition */
+
+  }
+
+  .menu-item img {
+    width: 2rem; /* Icon size */
+    height: 2rem;
+    flex-shrink: 0; /* Prevent icon shrinking */
+  }
+
+  .menu-item span {
+    display: none; /* Hide text when sidebar is collapsed */
+  }
+
+  /* Sidebar Hover to Expand */
+  .sidebar:hover {
+    width: 12.5rem; /* Expand the sidebar */
+  }
+
+  .sidebar:hover .menu-item {
+    justify-content: flex-start; /* Align items with text */
+    padding: 0.5rem 1rem; /* Add padding for expanded state */
+  }
+
+  .sidebar:hover .menu-item span {
+    display: inline-block; /* Show text when expanded */
+    opacity: 1; /* Smooth appearance */
+    transition: opacity 0.3s ease;
+  }
+
+  /* Adjust Content Margin */
+  .menu-content {
+    margin-left: 2rem; /* Adjust margin when sidebar is collapsed */
+    transition: margin-left 0.3s ease;
+  }
+
+  .sidebar:hover ~ .menu-content {
+    margin-left: 12.5rem; /* Adjust content margin when sidebar expands */
+  }
+
+  /* Upper Div Adjustments */
+  .upper-div {
+    flex-direction: column; /* Stack child components vertically */
+    justify-content: center; /* Center-align items */
+    align-items: stretch; /* Ensure full width */
+    gap: 1.5rem; /* Add space between items */
+    padding: 0 1rem; /* Adjust padding for smaller screens */
+  }
+
+
+  /* Adjust Page Title Container */
+  .page-title-container {
+    display: flex;
+    width: 100%; /* Take up full width */
+    padding: 0.5rem 3rem 0.5rem 0.5rem; /* Adjust padding for smaller screens */
+    text-align: center; /* Center-align the title */
+
+  }
+  /* Page Title */
+  .page-title {
+    font-size: 1rem; /* Adjust font size */
+    color: #041B2B; /* Text color */
+    font-family: Arial, sans-serif; /* Font style */
+    text-align: center; /* Center text */
+    flex: 1; /* Allow title to fill remaining space */
+    padding: 0.4rem; /* Padding inside the title */
+  }
+
+  /* Adjust Buttons for Smaller Screens */
+  .PBs-controls {
+    gap: 2rem; /* Reduce spacing between buttons */
+    width: 100%; /* Full width */
+    align-items: stretch; /* Ensure buttons take full width */
+
+  }
+
+  .PBs-button {
+    width: 100%; /* Allow buttons to resize dynamically */
+    padding: 1rem 0.8rem; /* Adjust padding */
+    font-size: 0.9em; /* Slightly smaller font size */
+  }
+
+
+  .lower-div {
+    gap: 0.8rem;
+    padding: 0.4rem;
+  }
+
+  .left-side,
+  .right-side {
+    gap: 0.6rem;
+  }
+
+  .description-sprint-box h3 {
+    font-size: 1.2rem;
+  }
+
+  .simulation-info {
+    font-size: 0.9rem;
+  }
+
+  .forecast-title {
+    font-size: 1.2rem;
+  }
+
+  .pbi-itemStory,
+  .forecast-columnStories {
+    font-size: 1rem;
+  }
+
+  /* Ensure Left and Right Side are Full Width */
+  .left-side,
+  .right-side {
+    flex: 1 1 100%;
+    padding: 0;
+  }
+
+  .simulation-controls {
+    flex-direction: row; /* Stack items vertically */
+    gap: 1rem; /* Add spacing between rows */
+  }
+
+  .row-container {
+    flex-direction: row; /* Stack label, input, and button vertically */
+    align-items: stretch; /* Ensure full width */
+    gap: 0.5rem;
+  }
+
+  .row-container label {
+    font-size: 1rem; /* Adjust label size for smaller screens */
+    width: 100%; /* Make labels span full width */
+    text-align: left; /* Align labels to the left */
+    margin-bottom: 0.2rem; /* Add spacing below label */
+  }
+
+  .row-container input,
+  .row-container button {
+    width: 100%; /* Full width for inputs and buttons */
+    box-sizing: border-box; /* Ensure padding is included in width */
+    font-size: 0.9rem;
+  }
+
+  .row-container button {
+    margin-top: 0.7rem; /* Add spacing above the button */
+  }
+}

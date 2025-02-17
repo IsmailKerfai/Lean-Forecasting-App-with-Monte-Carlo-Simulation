@@ -1,0 +1,24 @@
+/* Ensure the body has a white background */
+body {
+  background-color: #F5F5F5; /* Set background to white */
+  height: 100%; /* Ensure it spans the viewport height */
+  width: 100%; /* Ensure it spans the viewport width */
+
+}
+
+/* Apply background color to the app root container */
+:host {
+  display: block;
+  background-color: #F5F5F5; /* Set white background for app container */
+  height: 100%; /* Full viewport height */
+  width: 100%; /* Full viewport width */
+}
+
+/* Style the router outlet or main content wrapper */
+.router-outlet-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: #F5F5F5; /* Ensure routed components have white background */
+}
